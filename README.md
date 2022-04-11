@@ -2,15 +2,15 @@
  * @Author: matiastang
  * @Date: 2021-12-13 10:12:56
  * @LastEditors: matiastang
- * @LastEditTime: 2022-04-08 18:51:28
- * @FilePath: /matias-pinia-persisted-state/README.md
+ * @LastEditTime: 2022-04-11 15:25:05
+ * @FilePath: /matias-axios-throttle/README.md
  * @Description: datumwealth-vue-components
 -->
-# matias-pinia-persisted-state
+# matias-axios-throttle
 
 ## 说明
 
-该项目为`pinia`状态库的本地持久化项目。
+该项目为`axios`状态库的本地持久化项目。
 
 ## 安装与使用
 

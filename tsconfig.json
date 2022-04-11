@@ -1,19 +1,19 @@
 {
     "compilerOptions": {
-        // 开启类型定义文件生成的开关
-        "noEmit": false,
-        "declaration": true,
-        // 类型定义文件生成的目标目录
-        "outDir": "types",
-        // 只emit类型定义文件，而不emit其他诸如source-map等
-        "emitDeclarationOnly": true,
+        // // 开启类型定义文件生成的开关
+        // "noEmit": false,
+        // "declaration": true,
+        // // 类型定义文件生成的目标目录
+        // "outDir": "types",
+        // // 只emit类型定义文件，而不emit其他诸如source-map等
+        // "emitDeclarationOnly": true,
         // 社区也有相关的vite插件，插件地址。实现原理是使用ts-morph生成相应的类型申明文件。感兴趣的读者可以自行尝试。
 
         // "incremental": true, // TS编译器在第一次编译之后会生成一个存储编译信息的文件，第二次编译会在第一次的基础上进行增量编译，可以提高编译的速度
         // "tsBuildInfoFile": "./buildFile", // 增量编译文件的存储位置
         "diagnostics": true, // 打印诊断信息
         "target": "esnext", // 目标语言的版本, 与 Vue 的浏览器支持保持一致
-        "module": "CommonJS", // 生成代码的模板标准
+        "module": "ES2015", // 生成代码的模板标准
         // "module": "esnext",
 //     "outFile": "./app.js", // 将多个相互依赖的文件生成一个文件，可以用在AMD模块中，即开启时应设置"module": "AMD",
 //     "lib": ["DOM", "ES2015", "ScriptHost", "ES2019.Array"], // TS需要引用的库，即声明文件，es5 默认引用dom、es5、scripthost,如需要使用es的高级版本特性，通常都需要配置，如es8的数组新特性需要引入"ES2019.Array",
@@ -45,7 +45,7 @@
 //     "noUnusedParameters": true, // 检查未使用的函数参数(只提示不报错)
 //     "noFallthroughCasesInSwitch": true, // 防止switch语句贯穿(即如果没有break语句后面不会执行)
 //     "noImplicitReturns": true, //每个分支都会有返回值
-//     "esModuleInterop": true, // 允许export=导出，由import from 导入
+    // "esModuleInterop": true, // 允许export=导出，由import from 导入
 //     "allowUmdGlobalAccess": true, // 允许在模块中全局变量的方式访问umd模块
 //     "moduleResolution": "node", // 模块解析策略，ts默认用node的解析策略，即相对的方式导入
 //     "baseUrl": "./", // 解析非相对模块的基地址，默认是当前目录
@@ -64,7 +64,7 @@
         "experimentalDecorators": true,
         "skipLibCheck": true,
         "esModuleInterop": true,
-        "allowSyntheticDefaultImports": true,
+        "allowSyntheticDefaultImports": true, // true允许从没有默认导出的模块引入
         "resolveJsonModule": true,
         "sourceMap": true,
         "baseUrl": ".",

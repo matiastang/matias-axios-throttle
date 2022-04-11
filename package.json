@@ -22,9 +22,9 @@
     ],
     "scripts": {
         "dev": "vite",
-        "ts:build": "tsc --build src/plugin/tsconfig.json",
+        "ts:build": "tsc --build src/throttle/tsconfig.json",
         "build": "vite --config vite.build.config.ts build --mode production",
-        "cp:type": "cp src/plugin/buildTypes/index.d.ts dist",
+        "cp:type": "cp src/throttle/buildTypes/index.d.ts dist",
         "plugin:build": "pnpm run ts:build && pnpm run build && pnpm run cp:type",
         "push:npm:package": "gulp versionPatch && gulp npmPackagePush",
         "plugin:build:push:npm:package": "pnpm run plugin:build && pnpm run push:npm:package"
@@ -43,7 +43,8 @@
     },
     "homepage": "https://github.com/matiastang/vue-scaffold#readme",
     "dependencies": {
-        "pinia": "^2.0.13"
+        "axios": "^0.26.1",
+        "object-hash": "2.2.0"
     },
     "devDependencies": {
         "@element-plus/icons": "^0.0.11",
@@ -86,7 +87,6 @@
         "matias-pinia-persisted-state": "^0.1.7",
         "microbundle": "^0.14.2",
         "minimist": "^1.2.5",
-        "object-hash": "^2.2.0",
         "ora": "5.4.0",
         "path": "^0.12.7",
         "prettier": "^2.4.1",

@@ -5,6 +5,7 @@
         "declarationDir": "buildTypes",
         "outDir": "buildJs",
         "rootDir": ".",
+        "esModuleInterop": true, // 允许export=导出，由import from 导入
     },
     "include": ["**/*"],
     "exclude": ["buildJs","buildTypes"]
