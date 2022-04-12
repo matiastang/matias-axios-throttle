@@ -94,48 +94,29 @@ function dealWithTask(cb: (task: RequestTask) => void) {
 }
 
 /**
- * 移除请求
- * @param {Object} judgeBack
- * @param {Object} cb
- */
-// function removeRequestTask(judgeBack, cb) {
-//     let indexs = []
-//     if (REQUEST_TASK.length <= 0) {
-//         return
-//     }
-//     for (let i = 0; i < REQUEST_TASK.length; i++) {
-//         let task = REQUEST_TASK[i]
-//         if (judgeBack(task)) {
-//             indexs.push(i)
-//         }
-//     }
-//     for (let i = indexs.length - 1; i >= 0; i--) {
-//         let task = REQUEST_TASK[i]
-//         cb(task)
-//         REQUEST_TASK.splice(i, 1)
-//     }
-// }
-
-/**
  * 取消全部请求
+ * @param cancelMessage
  */
-const abortAll = () => {
+const abortAll = (cancelMessage = '取消请求') => {
     dealWithTask((task) => {
-        task.tokenSource.cancel('abortAll取消请求') // 取消请求
+        task.tokenSource.cancel(cancelMessage) // 取消请求
         task.isAbort = true
     })
 }
 
 /**
  * 取消指定的请求
+ * @param urls
+ * @param cancelMessage
+ * @returns
  */
-const abortRequestTasks = (urls: string[]) => {
+const abortRequestTasks = (urls: string[], cancelMessage = '取消请求') => {
     if (urls.length <= 0 || REQUEST_TASK.length <= 0) {
         return
     }
     dealWithTask((task) => {
         if (task.options.url && urls.includes(task.options.url)) {
-            task.tokenSource.cancel('abortAll取消请求') // 取消请求
+            task.tokenSource.cancel(cancelMessage) // 取消请求
             task.isAbort = true
         }
     })
@@ -143,21 +124,38 @@ const abortRequestTasks = (urls: string[]) => {
 
 /**
  * 保留指定请求，其他全部移除
+ * @param urls
+ * @param cancelMessage
+ * @returns
  */
-const keepRequestTasks = (urls: string[]) => {
+const keepRequestTasks = (urls: string[], cancelMessage = '取消请求') => {
     if (urls.length <= 0 || REQUEST_TASK.length <= 0) {
         return
     }
     dealWithTask((task) => {
         if (task.options.url && !urls.includes(task.options.url)) {
-            task.tokenSource.cancel('abortAll取消请求') // 取消请求
+            task.tokenSource.cancel(cancelMessage) // 取消请求
             task.isAbort = true
         }
     })
 }
 
+/**
+ * 获取所有任务
+ * @returns
+ */
 const getAllTask = () => {
     return REQUEST_TASK
+}
+
+/**
+ * 获取当前请求的所有地址
+ * @returns
+ */
+const getRequestUrls = () => {
+    return REQUEST_TASK.map((task) => {
+        return task.options.url
+    }).filter((url) => url)
 }
 
 export {
@@ -170,4 +168,5 @@ export {
     abortRequestTasks,
     keepRequestTasks,
     getAllTask,
+    getRequestUrls,
 }

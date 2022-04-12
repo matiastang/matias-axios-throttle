@@ -2,13 +2,20 @@
  * @Author: matiastang
  * @Date: 2021-11-11 18:55:21
  * @LastEditors: matiastang
- * @LastEditTime: 2022-04-11 14:55:56
+ * @LastEditTime: 2022-04-12 18:58:52
  * @FilePath: /matias-axios-throttle/src/request/request.ts
  * @Description: axios简单封装
  */
 import axios, { AxiosRequestConfig } from 'axios'
 import initInstance from './axiosInterceptors'
-import requestThrottle from '../throttle'
+// import { requestThrottle } from '../throttle/index'
+import {
+    requestThrottle,
+    abortAll,
+    abortRequestTasks,
+    keepRequestTasks,
+    getRequestUrls,
+} from '../throttle/index'
 /**
  * 失败返回类型
  */

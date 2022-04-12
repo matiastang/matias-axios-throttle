@@ -2,7 +2,7 @@
  * @Author: matiastang
  * @Date: 2021-12-13 10:12:56
  * @LastEditors: matiastang
- * @LastEditTime: 2022-04-11 15:25:05
+ * @LastEditTime: 2022-04-12 19:11:35
  * @FilePath: /matias-axios-throttle/README.md
  * @Description: datumwealth-vue-components
 -->
@@ -10,86 +10,63 @@
 
 ## 说明
 
-该项目为`axios`状态库的本地持久化项目。
+该项目为基于`axios`的一个接口节流功能，当调用一个请求后，在该请求未返回时再次调用了相同接口，如果参数相同则将复用上一个请求的结果，但两个调用接口的回调都将收到请求的结果。一个常见的应用常见是，不同组件里面封装调用了相同接口，组件又在同一个页面中渲染。
 
 ## 安装与使用
 
-1. 安装matias-pinia-persisted-state
+1. 安装matias-axios-throttle
 
 * `pnpm`导入
-> $ pnpm add -D matias-pinia-persisted-state
+> $ pnpm add -D matias-axios-throttle
 * `yarn`导入
-> $ yarn add -D matias-pinia-persisted-state
+> $ yarn add -D matias-axios-throttle
 * `npm`导入
-> $ npm install -D matias-pinia-persisted-state
-
-2. 引用
-
-```ts
-// main.ts
-import { createPersistedState, PERSISTED_STATE_KEY } from '@/pinia/piniaPersistedState'
-
-// pinia
-const pinia = createPinia()
-pinia.use(
-    createPersistedState({
-        key: 'pinia-state',
-    })
-)
-
-app.use(pinia)
-
-```
-* `PERSISTED_STATE_KEY`为本地持久化的`key`.默认是`pinia-state`可以在`createPersistedState`方法中传递自定义的`key`。
+> $ npm install -D matias-axios-throttle
 
 2. 使用
-
-`state`类型这种**必须**要包含`stateName`字段，用于命名本地缓存的`key`。
-
+* 仅需要用`requestThrottle`替换掉最后发起请求的方法。
 ```ts
-import { defineStore } from 'pinia'
+import {
+    requestThrottle,
+    abortAll,
+    abortRequestTasks,
+    keepRequestTasks,
+    getRequestUrls,
+} from '../throttle/index'
 
-interface State {
-    stateName: string
-}
+/**
+ * 节流请求
+ * @param httpAxios axios实例,将用该实例发起请求
+ * @param options 请求配置，类型同axios
+ * @returns promise
+ */
+requestThrottle(httpAxios, requestConfig)
+    .then((response) => {
+        console.log('请求成功')
+    })
+    .catch((err) => {
+        console.log('请求失败')
+    })
 
-export const useTestStore = defineStore('pinia/test', {
-    state: (): State => ({
-        stateName: 'test',
-    }),
-})
 ```
+1. 使用`requestThrottle`发起请求
+2. 开放几个操作任务的方法：
+   
+* `abortAll`取消全部请求
+* `getRequestUrls`获取当前请求的所有地址
+* `abortRequestTasks`取消指定的请求
+* `keepRequestTasks`保留指定请求，其他全部移除
+  
+**注意**`abortRequestTasks`和`keepRequestTasks`的参数都是`url`
+
+**注意**两次相同`requestThrottle`返回的的结果顺序和调用顺序是相反的。
 
 ## 版本
 
-### 0.1.7
-
-1. `state`没有`stateName`属性添加提示。
-
-### 0.1.6
-
-* 开启代码压缩
-
-### 0.1.5
-
-* 目录结构调整
-
-### 0.1.4
-
-* 更新类型文件导出
-
-### 0.1.3
-
-* 更新`package.json`的导出目录
-
-### 0.1.2
-
-* 更新目录结构及名称
-
 ### 0.1.1
 
-* 添加类型声明文件
+* 更新说明文档
 
 ### 0.1.0
 
-* 实现基本的本地持久化功能
+* 实现基本功能

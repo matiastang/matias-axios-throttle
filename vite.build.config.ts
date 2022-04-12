@@ -2,7 +2,7 @@
  * @Author: matiastang
  * @Date: 2021-12-30 15:37:18
  * @LastEditors: matiastang
- * @LastEditTime: 2022-04-11 15:18:00
+ * @LastEditTime: 2022-04-12 19:04:41
  * @FilePath: /matias-axios-throttle/vite.build.config.ts
  * @Description: npm 打包上传配置
  */
@@ -22,7 +22,7 @@ export default defineConfig({
     build: {
         lib: {
             entry: path.resolve(__dirname, './src/throttle/index.ts'),
-            name: 'matiasPiniaPersistedState',
+            name: 'matiasAxiosThrottle',
             formats: ['es', 'cjs', 'umd', 'iife'],
             fileName: (format) => `index.${format}.js`,
         },

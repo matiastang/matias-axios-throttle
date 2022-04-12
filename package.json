@@ -1,7 +1,7 @@
 {
-    "name": "matias-pinia-persisted-state",
-    "version": "0.1.7",
-    "description": "pinia状态持久化",
+    "name": "matias-axios-throttle",
+    "version": "0.1.1",
+    "description": "基于`axios`的一个接口节流功能",
     "main": "./dist/index.umd.js",
     "files": [
         "dist"
@@ -16,15 +16,16 @@
     },
     "keywords": [
         "matias",
+        "matiastang",
         "西筹",
         "datumwealth",
-        "matias-pinia-persisted-state"
+        "matias-axios-throttle"
     ],
     "scripts": {
         "dev": "vite",
         "ts:build": "tsc --build src/throttle/tsconfig.json",
         "build": "vite --config vite.build.config.ts build --mode production",
-        "cp:type": "cp src/throttle/buildTypes/index.d.ts dist",
+        "cp:type": "cp src/throttle/buildTypes/index.d.ts dist && cp src/throttle/buildTypes/throttle.d.ts dist && cp src/throttle/buildTypes/task.d.ts dist",
         "plugin:build": "pnpm run ts:build && pnpm run build && pnpm run cp:type",
         "push:npm:package": "gulp versionPatch && gulp npmPackagePush",
         "plugin:build:push:npm:package": "pnpm run plugin:build && pnpm run push:npm:package"
